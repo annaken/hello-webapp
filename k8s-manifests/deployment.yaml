@@ -23,9 +23,11 @@ spec:
         app: hello-webapp
     spec:
       containers:
-      - image: hello-webapp:latest
-        imagePullPolicy: Always
+      - image: docker.io/library/hello-webapp:latest
         name: hello-webapp
+        ports:
+        - name: metrics
+          containerPort: 8080
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
