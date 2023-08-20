@@ -7,13 +7,12 @@ import (
 )
 
 func main() {
-	router := gin.Default()
+  router := gin.Default()
 
 // Hello world
-	router.GET("/hello", func(c *gin.Context) {
-		c.String(200, "Hello Remarkable!")
-	})
-
+  router.GET("/hello", func(c *gin.Context) {
+	  c.String(200, "Hello Remarkable!")
+  })
 
 // Basic API
   api := router.Group("/api")
@@ -31,7 +30,7 @@ func main() {
   router.GET("/metrics", gin.WrapH(promhttp.Handler()))
 
 // Run
-	err := router.Run(":8080")
+  err := router.Run(":8080")
   if err != nil {
     log.Fatal(err.Error())
   }
