@@ -1,14 +1,15 @@
 package main
 import (
-    "github.com/gin-gonic/contrib/static"
-    "github.com/gin-gonic/gin"
+  "github.com/gin-gonic/contrib/static"
+  "github.com/gin-gonic/gin"
+  "github.com/prometheus/client_golang/prometheus/promhttp"
+  "log"
 )
 
 func main() {
 	router := gin.Default()
 
 // Hello world
-
 	router.GET("/hello", func(c *gin.Context) {
 		c.String(200, "Hello Remarkable!")
 	})
@@ -26,6 +27,12 @@ func main() {
 // Static page
   router.Use(static.Serve("/", static.LocalFile("./files", true)))
 
+// Metrics
+  router.GET("/metrics", gin.WrapH(promhttp.Handler()))
+
 // Run
-	router.Run(":8080")
+	err := router.Run(":8080")
+  if err != nil {
+    log.Fatal(err.Error())
+  }
 }
