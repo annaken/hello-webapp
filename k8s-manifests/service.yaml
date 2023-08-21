@@ -6,18 +6,7 @@ metadata:
   name: hello-webapp
   namespace: webapp
 spec:
-  externalTrafficPolicy: Cluster
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
   ports:
   - port: 8080
     protocol: TCP
     targetPort: 8080
-  selector:
-    app: hello-webapp
-  sessionAffinity: None
-  type: NodePort
-status:
-  loadBalancer: {}
