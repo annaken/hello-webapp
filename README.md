@@ -14,7 +14,7 @@ Files included in this repo are intended to build a container using a Dockerfile
   * run tests (unit, integration, regression, smoke) (discuss: parallel or serial)
   * if tests pass, approve PR
   * if the tests fail, notify the developer
-* When the PR is approved, the app can either be automatically released to the production environment, or marked as prod-ready and await manual intervention
+* When the PR is merged, the app can either be automatically released to the production environment, or marked as prod-ready and await manual intervention
 * When the app is released to prod, monitoring should alert quickly if there is a problem
 * If there is an issue, it might be appropriate to implement an automatic rollback
 
