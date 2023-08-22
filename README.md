@@ -4,18 +4,24 @@ This is a demo webapp which implements some simple functionality and exposes a m
 
 Files included in this repo are intended to build a container using a Dockerfile, and deploy to kubernetes.
 
-## Example deployment flow via CICD:
+## Deploy to development environment:
 
 * Source code is updated in the git repo and a PR is submitted
-* The PR initiates a CICD pipeline with the following steps:
-  * run linting and static code analysis
-  * build dev image
-  * deploy dev image to the development environment
-  * run tests (unit, integration, regression, smoke) (discuss: parallel or serial)
-  * if tests pass, approve PR
-  * if the tests fail, notify the developer
-* When the PR is merged, the app can either be automatically released to the production environment, or marked as prod-ready and await manual intervention
-* When the app is released to prod, monitoring should alert quickly if there is a problem
-* If there is an issue, it might be appropriate to implement an automatic rollback
+* Linting and static code analysis is run on the code
+* Image is built
+* Image is tested (unit, regression)
+* Image is tagged as dev-release
+* Dev image is deployed to the development environment
+* Deployment is tested (run integration, smoke, load tests)
+* If any stage of testing fails, block the PR
+* If all tests pass, approve the PR
 
+## Deploy to production environment:
+
+* PR is merged
+* EITHER: image is tagged as prod-release and awaits manual release
+* OR: image is automatically released to the production account
+* Monitoring/alerting should notify if there is an issue
+* Rollback plan should be ready
+* Consider automatic rollback if certain critieria are met
 
